@@ -2,6 +2,7 @@
 # coded by St.Watermelon
 
 # 필요한 패키지 임포트
+from math import trunc
 import tensorflow as tf
 
 from tensorflow.keras.models import Model
@@ -178,19 +179,23 @@ class A2Cagent(object):
             # 에피소드 초기화
             time, episode_reward, done = 0, 0, False
             # 환경 초기화 및 초기 상태 관측
-            state = self.env.reset()
+            state, _ = self.env.reset()
 
             while not done:
 
                 # 학습 가시화
-                #self.env.render()
+                self.env.render()
 
                 # 행동 샘플링
                 action = self.get_action(tf.convert_to_tensor([state], dtype=tf.float32))
                 # 행동 범위 클리핑
                 action = np.clip(action, -self.action_bound, self.action_bound)
                 # 다음 상태, 보상 관측
-                next_state, reward, done, _ = self.env.step(action)
+                #next_state, reward, done, _ = self.env.step(action)
+                next_state, reward, terminated , truncated , _ = self.env.step(action)
+                # if terminated & truncated:
+                #     done = True
+                done = terminated or truncated  
                 # shape 변환
                 state = np.reshape(state, [1, self.state_dim])
                 action = np.reshape(action, [1, self.action_dim])
@@ -257,9 +262,9 @@ class A2Cagent(object):
 
 
             # 에피소드 10번마다 신경망 파라미터를 파일에 저장
-            if ep % 10 == 0:
-                self.actor.save_weights("./save_weights/pendulum_actor.h5")
-                self.critic.save_weights("./save_weights/pendulum_critic.h5")
+            # if ep % 10 == 0:
+            #     self.actor.save_weights("./save_weights/pendulum_actor.h5")
+            #     self.critic.save_weights("./save_weights/pendulum_critic.h5")
 
         # 학습이 끝난 후, 누적 보상값 저장
         np.savetxt('./save_weights/pendulum_epi_reward.txt', self.save_epi_reward)
