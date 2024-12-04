@@ -262,9 +262,9 @@ class A2Cagent(object):
 
 
             # 에피소드 10번마다 신경망 파라미터를 파일에 저장
-            # if ep % 10 == 0:
-            #     self.actor.save_weights("./save_weights/pendulum_actor.h5")
-            #     self.critic.save_weights("./save_weights/pendulum_critic.h5")
+            if ep % 10 == 0:
+                self.actor.save_weights("./save_weights/pendulum_actor.h5")
+                self.critic.save_weights("./save_weights/pendulum_critic.h5")
 
         # 학습이 끝난 후, 누적 보상값 저장
         np.savetxt('./save_weights/pendulum_epi_reward.txt', self.save_epi_reward)
@@ -275,4 +275,5 @@ class A2Cagent(object):
     def plot_result(self):
         plt.plot(self.save_epi_reward)
         plt.show()
+        #print("abc")
 

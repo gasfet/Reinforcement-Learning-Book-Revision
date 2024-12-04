@@ -4,7 +4,9 @@
 ## 에이전트를 학습하고 결과를 도시하는 파일
 # 필요한 패키지 임포트
 from a2c_learn import A2Cagent
-import gym
+import gymnasium as gym
+#import gym
+
 
 def main():
 
