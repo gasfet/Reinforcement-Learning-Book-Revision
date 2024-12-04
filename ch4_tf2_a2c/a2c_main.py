@@ -8,7 +8,7 @@ import gym
 
 def main():
 
-    max_episode_num = 1000   # 최대 에피소드 설정
+    max_episode_num = 10   # 최대 에피소드 설정
     env_name = 'Pendulum-v1'
     env = gym.make(env_name)  # 환경으로 OpenAI Gym의 pendulum-v0 설정
     agent = A2Cagent(env)   # A2C 에이전트 객체
@@ -34,6 +34,20 @@ def main2():
         #         print("Episode finished after {} timesteps".format(t+1))      
         #         break
 
+
+def main3():
+    env = gym.make("LunarLander-v2", render_mode="human")
+    env.action_space.seed(42)
+
+    observation, info = env.reset(seed=42)
+
+    for _ in range(1000):
+        observation, reward, terminated, truncated, info = env.step(env.action_space.sample())
+
+        if terminated or truncated:
+            observation, info = env.reset()
+
+    env.close()
 
 if __name__=="__main__":
     main()
