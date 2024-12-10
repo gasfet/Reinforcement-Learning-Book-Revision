@@ -3,7 +3,8 @@
 
 ## 학습된 신경망 파라미터를 가져와서 에이전트를 실행시키는 파일
 # 필요한 패키지 임포트
-import gym
+#import gym
+import gymnasium as gym
 import tensorflow as tf
 from a2c_learn import A2Cagent
 

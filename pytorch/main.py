@@ -226,7 +226,13 @@ for i_episode in range(num_episodes):
             plot_durations()
             break
 
-print('Complete')
-plot_durations(show_result=True)
-plt.ioff()
-plt.show()
+def main():
+    agent = Agent()
+    agent.train()    
+    print('Complete')
+    plot_durations(show_result=True)
+    plt.ioff()
+    plt.show()
+
+if __name__ == "__main__":
+    main()    
