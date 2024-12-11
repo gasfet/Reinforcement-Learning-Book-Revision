@@ -5,3 +5,7 @@
 /pytorch/.vs
 /ch5_tf2_a3c/A3CData/.vs
 /ch4_tf2_a2c/save_weights
+/ch4_tf2_a2c/save_weights
+/ch4_tf2_a2c/save_weights
+/ch4_tf2_a2c/save_weights
+*.h5
